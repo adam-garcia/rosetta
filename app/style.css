@@ -132,3 +132,8 @@ textarea {
     border-color: #16a085;
     cursor: pointer;
 }
+
+
+#about h2 {
+    margin-top: 4rem;
+}
