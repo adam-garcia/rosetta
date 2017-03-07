@@ -1,0 +1,139 @@
+/**
+ * Document Styling for Rosetta Web Application
+ */
+body {
+    font-family: 'Open Sans', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#app {
+    margin-top: 5rem;
+}
+
+/* General Page Edits */
+h1 {
+    font-weight: 400;
+    font-size: 5.0rem;
+}
+p {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+ul#checklist {
+    font-size:; 1.75rem;
+    list-style: none;
+}
+#project-title {
+    display: inline-block;
+    cursor: pointer;
+}
+#project-title:hover {
+    cursor: text;
+}
+#project-title:focus {
+    cursor: text;
+}
+#project-title > span {
+    color: #adadad;
+}
+
+
+/* Navbar Setup */
+div#nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999999;
+}
+div#nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ecf0f1;
+}
+
+div#nav li {
+    float: left;
+    margin-bottom: 0;
+}
+
+div#nav li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+div#nav li a:hover:not(.active) {
+    background-color: #bdc3c7;
+    color: white;
+}
+
+div#nav li a.active {
+    color: white;
+    background-color: #3498db;
+}
+
+div#nav li a.active:hover {
+    background-color: #2980b9;
+}
+
+#download {
+    float: right !important;
+    background-color: #2ecc71 !important;
+}
+
+#download a:hover  {
+    background-color: #27ae60 !important;
+}
+#download a {
+    color: white !important;
+}
+
+
+/* Editor Styling */
+.CodeMirror, .CodeMirror-scroll {
+    min-height: 600px;
+}
+textarea {
+    height: 670px;
+    width: 100%;
+}
+
+#components {
+    position: relative;
+}
+#new-component > input {
+    border-radius: 4px 0px 0px 4px;
+    z-index: 1;
+}
+#new-component > span {
+    position: absolute;
+    z-index: 0;
+    left: 213px;
+    padding-top: 7px;
+    padding-left: 2rem;
+    height: 29px;
+    border-top: 1px solid #1abc9c;
+    border-bottom: 1px solid #1abc9c;
+    border-right: 1px solid #1abc9c;
+    border-radius: 0px 4px 4px 0px;
+    width: 50px;
+    color: white;
+    background-color: #1abc9c;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */    
+}
+#new-component > span:hover {
+    background-color: #16a085;
+    border-color: #16a085;
+    cursor: pointer;
+}
+
+
+#about h2 {
+    margin-top: 4rem;
+}
