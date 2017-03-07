@@ -1,1 +1,1 @@
-Rosetta: a research data lingua franca
+# Rosetta: an opinionated research data lingua franca
