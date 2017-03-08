@@ -144,7 +144,6 @@ $( document ).ready(function() {
         root.file("README.txt", readme.txt);
         root.file("README.md", readme.md);
         root.file("README.html", readme.html);
-        root.file("README.docx", "foo bar");
 
         var plan = root.folder("AnalysisPlans");
         plan.file("Aim_N/README.txt", "Describe the analysis aim here");
