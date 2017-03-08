@@ -33,35 +33,72 @@ $( document ).ready(function() {
      * Project Title Interactivity
      */
     var projectTitle = "My Project Title <span>(Click to edit...)</span>";
+    var defaultTitle = projectTitle;
     $("#project-title")
         .html(projectTitle)
         .promise().done(function() {
             projectTitle = "My Project Title";
         });
     $("h2[contenteditable]").on('blur keyup paste', function() {
-        projectTitle = $(this).text();
+        projectTitle = $(this).html() == defaultTitle ? "My Project Title" : $(this).text();
+    });
+
+    /**
+     * Checklist Requirement
+     */
+    $("#checklist input[type='checkbox']").click(function(){
+        $(this).next().toggleClass('strikethrough');
+        nBoxes = $("#checklist input[type='checkbox']").length;
+        nChecks = $("#checklist input[type='checkbox']:checked").length;
+        if (nChecks == nBoxes) {
+            $("#download a").removeClass('disallow');
+        } else {
+            $("#download a").addClass('disallow');
+        };
     });
 
 
     /**
+     * SimpleMDE Customization
+     */
+    simplemde.codemirror.on("change", function(){
+        if (!$("#checklist input#todo-readme").is(':checked')) {
+            $("#checklist input#todo-readme").click();
+        }
+    });
+    /**
      * Project Options Configuration
      */
     var components = { "" : "" };
-    function addComponent() {
-        var component = $("#new-component input").val();
-        if (component != "") {
-            components[component] = component;
-        }
-    };
-
-    $("#new-component input").on('keyup', function(e) {
-        if (e.keyCode==13) {
-            addComponent();
-        }
-    });
     $("#new-component span").on('click', function(e) {
-        addComponent();
+        var component = $("#new-component input")
+                            .val()
+                            .replace(/\s/gi, "-");
+        if (component != "" && components[component] == undefined) {
+            components[component] = component;
+            $("<span>")
+                .text(component)
+                .click(function() {
+                    components[component] = null;
+                    $(this)
+                        .fadeOut()
+                        .promise()
+                        .done(function(){
+                            $(this).remove();
+                        });
+                })
+                .appendTo($("#components-list"));
+            $("#new-component input").val("");
+            window.components = components;
+        };
+        if (!$("#checklist input#todo-components").is(':checked')) {
+            $("#checklist input#todo-components").click();
+        }
     });
+    $("#new-component input").on('keyup', function(e) {
+        if (e.keyCode==13) {$("#new-component span").click(); };
+    });
+
 
 
 
@@ -69,15 +106,20 @@ $( document ).ready(function() {
      * File Download Specification
      */    
     var readme = {};
-    $("#download").click(function() {
+    $("#download a").click(function(event) {
         // Called when 'Download' Button Clicked
+        if (!$(this).hasClass('disallow')) {
+            download();
+        } else {
+            event.preventDefault();
+        }
+    });
+    function download() {
         simplemde.togglePreview();
         projectFolder = projectTitle + ".zip";
-
         readme.md = simplemde.value();
         readme.html = $(".editor-preview").first().html();
         readme.txt = readme.html.replace(/<(?:.|\n)*?>/gm, '');
-
         /**
          * Current Structure:
          *     ProjectTitle/
@@ -114,7 +156,16 @@ $( document ).ready(function() {
         reports.folder("Other");
 
         var data = root.folder("Data");
-
+        $.map(components, function(c){
+            if (c != null && c != "") {
+                var module = {};
+                module.name = c;
+                module.data = data.folder(c);
+                module.data.folder("Collection");
+                module.data.folder("Entry");
+                module.data.folder("Programs");
+            }
+        })
 
         root.generateAsync({type: "blob"})
             .then(function(content) {
@@ -123,6 +174,6 @@ $( document ).ready(function() {
             .then(function() {
                 simplemde.togglePreview();      
             });  
-    });
+    };
 
 });
