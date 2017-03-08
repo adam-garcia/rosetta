@@ -26,7 +26,7 @@ ul#checklist {
     display: inline-block;
     cursor: pointer;
 }
-#project-title:hover {
+#project-title:focus {
     cursor: text;
 }
 #project-title:focus {
@@ -66,29 +66,54 @@ div#nav li a {
 }
 
 div#nav li a:hover:not(.active) {
-    background-color: #bdc3c7;
     color: white;
+    background-color: #bdc3c7;
+    transition: all ease 0.35s;
 }
 
 div#nav li a.active {
     color: white;
     background-color: #3498db;
+    transition: all ease 0.35s;
 }
 
 div#nav li a.active:hover {
     background-color: #2980b9;
 }
 
+/* Download-Specific */
 #download {
     float: right !important;
-    background-color: #2ecc71 !important;
+    background-color: #ddd !important;
+    transition: all ease 0.35s;
 }
 
-#download a:hover  {
-    background-color: #27ae60 !important;
+#download a:hover.disallow  {
+    cursor: not-allowed;
+    color: #666 !important;
+    background-color: #ddd !important;
+    transition: all ease 0.35s;
 }
-#download a {
+
+#download a:not(.disallow) {
     color: white !important;
+    background-color: #2ecc71 !important;
+    transition: all ease 0.35s;
+}
+
+#download a:hover:not(.disallow)  {
+    background-color: #27ae60 !important;
+    transition: all ease 0.35s;
+}
+
+
+
+
+
+
+/* Checklist Helper Class */
+.strikethrough {
+    text-decoration: line-through;
 }
 
 
@@ -100,18 +125,27 @@ textarea {
     height: 670px;
     width: 100%;
 }
+div.editor-toolbar.fullscreen {
+    top: 50px;
+}
+div.CodeMirror-fullscreen,
+div.editor-preview-active-side {
+    top: 100px;
+}
 
+/* Project Component UI */
 #components {
     position: relative;
 }
 #new-component > input {
     border-radius: 4px 0px 0px 4px;
     z-index: 1;
+    width: 225px;
 }
 #new-component > span {
     position: absolute;
     z-index: 0;
-    left: 213px;
+    left: 224px;
     padding-top: 7px;
     padding-left: 2rem;
     height: 29px;
@@ -122,10 +156,10 @@ textarea {
     width: 50px;
     color: white;
     background-color: #1abc9c;
-    -webkit-user-select: none;  /* Chrome all / Safari all */
-    -moz-user-select: none;     /* Firefox all */
-    -ms-user-select: none;      /* IE 10+ */
-    user-select: none;          /* Likely future */    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 #new-component > span:hover {
     background-color: #16a085;
@@ -133,6 +167,32 @@ textarea {
     cursor: pointer;
 }
 
+#components-list {
+    min-height: 75px;
+    margin-top: 1rem;
+}
+
+#components-list span {
+    display: inline-block;
+    margin: 0 0.5rem;
+    margin-bottom: 10px;
+    background-color: #34495e;
+    border-radius: 24px;
+    padding: 0.15rem 3rem;
+    color: white;
+    min-width: 30px;
+    text-align: center;
+    transition: background-color ease 0.2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#components-list span:hover {
+    background-color: #95a5a6;
+    cursor: pointer;
+}
 
 #about h2 {
     margin-top: 4rem;
