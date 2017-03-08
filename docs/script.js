@@ -99,6 +99,35 @@ $( document ).ready(function() {
         if (e.keyCode==13) {$("#new-component span").click(); };
     });
 
+    var logistics = { "" : "" };
+    $("#new-logistic span").on('click', function(e) {
+        var logistic = $("#new-logistic input")
+                            .val()
+                            .replace(/\s/gi, "-");
+        if (logistic != "" && logistics[logistic] == undefined) {
+            logistics[logistic] = logistic;
+            $("<span>")
+                .text(logistic)
+                .click(function() {
+                    logistics[logistic] = null;
+                    $(this)
+                        .fadeOut()
+                        .promise()
+                        .done(function(){
+                            $(this).remove();
+                        });
+                })
+                .appendTo($("#logistics-list"));
+            $("#new-logistic input").val("");
+            window.logistics = logistics;
+        };
+        if (!$("#checklist input#todo-logistics").is(':checked')) {
+            $("#checklist input#todo-logistics").click();
+        }
+    });
+    $("#new-logistic input").on('keyup', function(e) {
+        if (e.keyCode==13) {$("#new-logistic span").click(); };
+    });
 
 
 
@@ -164,7 +193,14 @@ $( document ).ready(function() {
                 module.data.folder("Entry");
                 module.data.folder("Programs");
             }
-        })
+        });
+
+        var implementation = root.folder("Logistics")
+        $.map(logistics, function(l) {
+            if (l != null && l != "") {
+                implementation.folder(l);
+            }
+        });
 
         root.generateAsync({type: "blob"})
             .then(function(content) {
