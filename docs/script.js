@@ -162,7 +162,8 @@ $( document ).ready(function() {
         simplemde.togglePreview();
         projectFolder = projectTitle + ".zip";
         readme.md = simplemde.value();
-        readme.html = $(".editor-preview").first().html();
+        readme.html = '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">' +
+                      $(".editor-preview").first().html();
         readme.txt = readme.html.replace(/<(?:.|\n)*?>/gm, '');
         /**
          * Current Structure:
