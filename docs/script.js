@@ -12,7 +12,7 @@ $( document ).ready(function() {
         } else if (href != "#") {
             $("html, body").animate({
                 scrollTop: $(href).offset().top - 50
-            }, 'slow');
+            }, 400);
         }
     });
 
@@ -47,7 +47,7 @@ $( document ).ready(function() {
     });
 
     /**
-     * Checklist Requirement
+     * Checklist
      */
     $("#checklist input[type='checkbox']").click(function(){
         $(this).next().toggleClass('strikethrough');
@@ -59,6 +59,11 @@ $( document ).ready(function() {
             $("#download a").addClass('disallow');
         };
     });
+    $("#checklist span")
+        .css("cursor", "pointer")
+        .click(function() {
+        $(this).prev().click();
+    });
 
 
     /**
@@ -69,6 +74,18 @@ $( document ).ready(function() {
             $("#checklist input#todo-readme").click();
         };
         simplemde.edited = true;
+    });
+
+    /**
+     * Study Design Options
+     */
+    $("#longitudinal-lvl").fadeOut();
+    $("#longitudinal-yes").click(function() {
+        $("#longitudinal-lvl").fadeIn();
+        console.log('aaa');
+    });
+    $("#longitudinal-no").click(function() {
+        $(this).addClass()
     });
 
     /**
@@ -171,11 +188,13 @@ $( document ).ready(function() {
          *     ├── README.txt
          *     ├── README.md
          *     ├── README.html
-         *     ├── About
          *     ├── AnalysisPlans/
          *     │   └── AimN/
          *     ├── SummaryReports/
          *     │   └── AudienceN/
+         *     ├── Logistics/
+         *     │   ├── (Budget)/
+         *     │   └── (Personnel)/
          *     └── Data/
          *         └── Module_X/
          *             ├── Collection/
