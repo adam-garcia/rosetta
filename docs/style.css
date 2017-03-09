@@ -6,7 +6,7 @@ body {
 }
 
 #app {
-    margin-top: 5rem;
+    margin-top: 7rem;
 }
 
 /* General Page Edits */
@@ -43,6 +43,9 @@ div#nav {
     top: 0;
     width: 100%;
     z-index: 999999;
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
 }
 div#nav ul {
     list-style-type: none;
@@ -132,6 +135,7 @@ div.CodeMirror-fullscreen,
 div.editor-preview-active-side {
     top: 100px;
 }
+
 
 /* Project Component UI */
 #modules ,
