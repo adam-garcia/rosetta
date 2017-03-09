@@ -14,15 +14,17 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container-fluid" id="nav">
-    <ul>
-      <li><a class="active" href="#home">Rosetta</a></li>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#project-title">Documentation</a></li>
-      <li><a href="#options">Options</a></li>
-      <li><a href="#about">About</a></li>
-      <li id="download"><a href="#" class="disallow">Download</a></li>
-    </ul>
+  <div class="container">
+    <div class="container" id="nav">
+      <ul>
+        <li><a class="active" href="#home">Rosetta</a></li>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#project-title">Documentation</a></li>
+        <li><a href="#options">Options</a></li>
+        <li><a href="#about">About</a></li>
+        <li id="download"><a href="#" class="disallow">Download</a></li>
+      </ul>
+    </div>
   </div>
   <div id="app">
     <div class="container">
@@ -71,6 +73,10 @@
               <h3>Project Options</h3>
               <div id="design">
                 <h4>Study Design</h4>
+                <label for="longitudinal-yes">Did the study follow a longitudinal or pre-post design?</label>
+                <input id="longitudinal-no" type="button" value="No">
+                <input id="longitudinal-yes" type="button" value="Yes">
+                <input id="longitudinal-lvl" type="number" placeholder="How many timepoints?">
               </div>
             </div>
           </div>
