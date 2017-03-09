@@ -47,10 +47,14 @@
                 </li>
                 <li>
                   <input type="checkbox" id="todo-components">
-                  <span>Define project components</span>
+                  <span>Define Data Sources/Modules</span>
                 </li>
                 <li>
-                  <input type="checkbox">
+                  <input type="checkbox" id="todo-logistics">
+                  <span>List Study Logistics</span>
+                </li>
+                <li>
+                  <!-- <input type="checkbox"> -->
                   <span>others?</span>
                 </li>
               </ul>
@@ -66,11 +70,16 @@
             <div class="twelve column">
               <h3>Project Options</h3>
               <div id="design">
+                <h4>Study Design</h4>
               </div>
-              <div id="components">
+            </div>
+          </div>
+          <div class="row">
+            <div class="one-half column">
+              <div id="modules">
                 <h4>Data Modules</h4>
-                <div id="new-component">
-                  <input type="text" id="new-component" />
+                <div id="new-module">
+                  <input type="text" id="new-module" />
                   <span>Add</span>
                   <h6>
                     <small>
@@ -79,8 +88,9 @@
                   </h6>
                   <h6></h6>
                 </div>
-                <div id="components-list"></div>
               </div>
+            </div>
+            <div class="one-half column">
               <div id="logistics">
                 <h4>Study Logistics</h4>
                 <div id="new-logistic">
@@ -93,15 +103,23 @@
                   </h6>
                   <h6></h6>
                 </div>
-                <div id="logistics-list"></div>
               </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="twelve columns">
+                <div id="components-list"></div>
             </div>
           </div>
         </div>
       </div>
       <div class="row" id="about">
       <h2>About Rosetta</h2>
-      <p>This project aims to streamline and standardize research data migration. Once a project README is written and base study components listed, a folder with the following structure can be downloaded:</p>
+      <p>
+        This project aims to streamline and standardize research data migration. While excellent solutions (such as <a href="http://osf.io">the Open Science Framework</a>) to this problem exist, they often require hosting information online, whereas with human subjects research studies additional safeguards may be mandated. Rosetta merely provides a folder structure for projects and encourages a small set of best practices. 
+
+        Once a project README is written and base study components listed, a folder with the following structure can be downloaded:
+      </p>
       <pre><code>
 ProjectTitle/
 |-- README.txt
@@ -121,6 +139,9 @@ ProjectTitle/
         `-- Programs/
             `-- TimeN/
       </code></pre>
+      <p>
+        Note: Rosetta is a work in progress, and will likely change over the coming weeks. <a href="https://github.com/adam-garcia/rosetta">Stay tuned</a> for updates!
+      </p>
       </div>
     </div>
   </div>

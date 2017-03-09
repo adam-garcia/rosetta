@@ -27,7 +27,7 @@ $( document ).ready(function() {
         placeholder: "Give a top-level desciption of your study here..."
     });
 
-
+    window.simplemde = simplemde;
 
     /**
      * Project Title Interactivity
@@ -41,6 +41,9 @@ $( document ).ready(function() {
         });
     $("h2[contenteditable]").on('blur keyup paste', function() {
         projectTitle = $(this).html() == defaultTitle ? "My Project Title" : $(this).text();
+        if (simplemde.edited != true) {
+            simplemde.value("# " + projectTitle);
+        }
     });
 
     /**
@@ -61,25 +64,32 @@ $( document ).ready(function() {
     /**
      * SimpleMDE Customization
      */
-    simplemde.codemirror.on("change", function(){
+    $(".CodeMirror").click(function(){
         if (!$("#checklist input#todo-readme").is(':checked')) {
             $("#checklist input#todo-readme").click();
-        }
+        };
+        simplemde.edited = true;
     });
+
     /**
      * Project Options Configuration
      */
-    var components = { "" : "" };
-    $("#new-component span").on('click', function(e) {
-        var component = $("#new-component input")
+    var modules = { "" : "" };
+    $("#new-module span").on('click', function(e) {
+        var module = $("#new-module input")
                             .val()
-                            .replace(/\s/gi, "-");
-        if (component != "" && components[component] == undefined) {
-            components[component] = component;
+                            .replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter) {
+                                return letter.toUpperCase();
+                            })
+                            .replace(/\s/g, "");
+        if (module != "" && modules[module] == undefined) {
+            modules[module] = module;
             $("<span>")
-                .text(component)
+                .text(module)
+                .attr("title", "Click to Remove")
+                .addClass("data-component")
                 .click(function() {
-                    components[component] = null;
+                    modules[module] = null;
                     $(this)
                         .fadeOut()
                         .promise()
@@ -88,26 +98,31 @@ $( document ).ready(function() {
                         });
                 })
                 .appendTo($("#components-list"));
-            $("#new-component input").val("");
-            window.components = components;
+            $("#new-module input").val("");
+            window.modules = modules;
         };
-        if (!$("#checklist input#todo-components").is(':checked')) {
-            $("#checklist input#todo-components").click();
+        if (!$("#checklist input#todo-modules").is(':checked')) {
+            $("#checklist input#todo-modules").click();
         }
     });
-    $("#new-component input").on('keyup', function(e) {
-        if (e.keyCode==13) {$("#new-component span").click(); };
+    $("#new-module input").on('keyup', function(e) {
+        if (e.keyCode==13) {$("#new-module span").click(); };
     });
 
     var logistics = { "" : "" };
     $("#new-logistic span").on('click', function(e) {
         var logistic = $("#new-logistic input")
                             .val()
-                            .replace(/\s/gi, "-");
+                            .replace(/(?:^\w|[A-Z]|\b\w)/g, function(letter) {
+                                return letter.toUpperCase();
+                            })
+                            .replace(/\s/g, "");
         if (logistic != "" && logistics[logistic] == undefined) {
             logistics[logistic] = logistic;
             $("<span>")
                 .text(logistic)
+                .addClass("logistics-component")
+                .attr("title", "Click to Remove")
                 .click(function() {
                     logistics[logistic] = null;
                     $(this)
@@ -117,7 +132,7 @@ $( document ).ready(function() {
                             $(this).remove();
                         });
                 })
-                .appendTo($("#logistics-list"));
+                .appendTo($("#components-list"));
             $("#new-logistic input").val("");
             window.logistics = logistics;
         };
@@ -184,7 +199,7 @@ $( document ).ready(function() {
         reports.folder("Other");
 
         var data = root.folder("Data");
-        $.map(components, function(c){
+        $.map(modules, function(c){
             if (c != null && c != "") {
                 var module = {};
                 module.name = c;
